@@ -1,13 +1,13 @@
-package com.epam.canvaschart;
+package com.epam.canvaschart.chart;
 
 public class PointPos implements Comparable<PointPos> {
 
-    public PointPos(long x, float y) {
+    public PointPos(double x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public long x;
+    public double x;
     public float y;
     public int position;
 

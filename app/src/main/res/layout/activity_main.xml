@@ -38,7 +38,7 @@
     </LinearLayout>
 
 
-    <com.epam.canvaschart.LineChart
+    <com.epam.canvaschart.chart.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

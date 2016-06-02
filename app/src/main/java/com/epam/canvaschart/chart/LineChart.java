@@ -1,4 +1,4 @@
-package com.epam.canvaschart;
+package com.epam.canvaschart.chart;
 
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -17,6 +17,8 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+
+import com.epam.canvaschart.BuildConfig;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -57,6 +59,7 @@ public class LineChart extends View implements View.OnTouchListener, ISubmitSeri
     private IDataLoader chartDataLoader;
     private Series series;
     private View secondProgress;
+    private int countSeriesPoints;
 
     public LineChart(Context context) {
         super(context);
@@ -75,6 +78,10 @@ public class LineChart extends View implements View.OnTouchListener, ISubmitSeri
 
     @Override
     public void submitSeries(Series series) {
+        if (series.size() == countSeriesPoints) {
+            return;
+        }
+        countSeriesPoints = series.size();
         this.series = series;
         postInvalidate();
     }
@@ -84,7 +91,6 @@ public class LineChart extends View implements View.OnTouchListener, ISubmitSeri
             return;
         }
         setOnTouchListener(this);
-        backgroundColor = context.getResources().getColor(android.R.color.holo_blue_bright);
         mScaleGestureDetector = new ScaleGestureDetector(getContext(), new ScaleGestureListener());
         mGestureDetector = new GestureDetector(getContext(), new ScrollGestureListener());
 
@@ -278,8 +284,8 @@ public class LineChart extends View implements View.OnTouchListener, ISubmitSeri
 
     private void initDataLoader(IDataLoader chartDataLoader) {
         chartDataLoader.setProgressView(secondProgress);
-        final long startAvailableTimestamp = chartDataLoader.getStartAvailableXValue();
-        final long endAvailableTimestamp = chartDataLoader.getEndAvailableXValue();
+        final double startAvailableTimestamp = chartDataLoader.getStartAvailableXValue();
+        final double endAvailableTimestamp = chartDataLoader.getEndAvailableXValue();
         setMinMaxBorders(startAvailableTimestamp, endAvailableTimestamp);
         scrollToXValue(startAvailableTimestamp);
     }
@@ -289,6 +295,12 @@ public class LineChart extends View implements View.OnTouchListener, ISubmitSeri
         if (chartDataLoader != null) {
             chartDataLoader.setProgressView(secondProgress);
         }
+    }
+
+    @Override
+    public void setBackgroundColor(int backgroundColor) {
+        super.setBackgroundColor(backgroundColor);
+        this.backgroundColor = backgroundColor;
     }
 
     public void setDateFormat(DateFormat dateFormat) {

@@ -3,12 +3,16 @@ package com.epam.canvaschart;
 import android.content.Context;
 import android.view.View;
 
+import com.epam.canvaschart.chart.IDataLoader;
+import com.epam.canvaschart.chart.ISubmitSeries;
+import com.epam.canvaschart.chart.Series;
+
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChartAssetsDataLoader implements IDataLoader {
 
-    private final long POINTS_SIZE = 50000;
+    private final double POINTS_SIZE = 100000000000f + 50000f;
     private Context context;
     private View progress;
 
@@ -17,7 +21,7 @@ public class ChartAssetsDataLoader implements IDataLoader {
 
     public ChartAssetsDataLoader(Context context) {
         this.context = context;
-        for (long i = 0; i < POINTS_SIZE; i += (new Random()).nextInt(5)) {
+        for (double i = 100000000000f; i < POINTS_SIZE; i += (new Random()).nextDouble()) {
             series.addPoint(i, (new Random()).nextInt(100));
         }
         series.calculatePointPositions();
@@ -29,7 +33,7 @@ public class ChartAssetsDataLoader implements IDataLoader {
     }
 
     @Override
-    public long getStartAvailableXValue() {
+    public double getStartAvailableXValue() {
         return series.getPointsSet().first().x;
     }
 
@@ -43,7 +47,7 @@ public class ChartAssetsDataLoader implements IDataLoader {
     }
 
     @Override
-    public long getEndAvailableXValue() {
+    public double getEndAvailableXValue() {
         return series.getPointsSet().last().x;
     }
 }

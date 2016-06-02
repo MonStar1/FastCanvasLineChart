@@ -1,4 +1,4 @@
-package com.epam.canvaschart;
+package com.epam.canvaschart.chart;
 
 public interface ISubmitSeries {
 

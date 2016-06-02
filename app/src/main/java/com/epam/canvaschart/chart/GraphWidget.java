@@ -1,4 +1,4 @@
-package com.epam.canvaschart;
+package com.epam.canvaschart.chart;
 
 public class GraphWidget {
 
@@ -11,6 +11,7 @@ public class GraphWidget {
     private int topPadding;
     private int bottomPadding;
     private double rangeX;
+    private double rangeY;
     private Number minRangeX;
     private Number maxRangeX;
     private Number minLeftXBorder;
@@ -40,6 +41,7 @@ public class GraphWidget {
 
     public void setMinY(double minY) {
         this.minY = minY;
+        rangeY = maxY - minY;
     }
 
     public Number getMaxY() {
@@ -48,6 +50,7 @@ public class GraphWidget {
 
     public void setMaxY(double maxY) {
         this.maxY = maxY;
+        rangeY = maxY - minY;
     }
 
     public double getXRange() {
@@ -55,7 +58,7 @@ public class GraphWidget {
     }
 
     public double getYRange() {
-        return maxY - minY;
+        return rangeY;
     }
 
     public int getLeftPadding() {

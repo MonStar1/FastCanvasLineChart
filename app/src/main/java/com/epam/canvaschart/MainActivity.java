@@ -1,10 +1,12 @@
 package com.epam.canvaschart;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.text.SimpleDateFormat;
+import com.epam.canvaschart.chart.GraphWidget;
+import com.epam.canvaschart.chart.LineChart;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         mChart.setMinMaxRange(MIN_RANGE, MAX_RANGE);
         mChart.setRange(MIN_RANGE);
-        mChart.setDateFormat(new SimpleDateFormat("dd MMM HH:mm:ss"));
+        mChart.setBackgroundColor(Color.BLACK);
+//        mChart.setDateFormat(new SimpleDateFormat("dd MMM HH:mm:ss"));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.epam.canvaschart;
+package com.epam.canvaschart.chart;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,7 @@ public class Series {
         return pointsList;
     }
 
-    public void addPoint(long x, float y) {
+    public void addPoint(double x, float y) {
         isPointPosCalculated.set(false);
         PointPos pointPos = new PointPos(x, y);
         pointsSet.add(pointPos);
@@ -41,5 +41,9 @@ public class Series {
             pointsList.add(pointPos);
         }
         isPointPosCalculated.set(true);
+    }
+
+    public int size() {
+        return pointsSet.size();
     }
 }
